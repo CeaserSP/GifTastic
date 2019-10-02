@@ -1,3 +1,6 @@
+$(document).ready(function(){
+
+});
 // Array topics
 
 // for loop to appends topics to html

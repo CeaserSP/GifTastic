@@ -9,8 +9,10 @@ $(document).ready(function () {
   // for loop to appends topics to html
   for (var i = 0; i < topics.length; i++) {
     var button = $("<button>" + topics[i] + "</button>");
-    button.addClass(topics[i])
+    // button.addClass(topics[i])
     button.appendTo(".buttons");
+    button.attr("data-name", topics[i]);
+    button.attr("data-active", false);
   }
   //  get gifs by topic
   $("button").on("click", function () {
@@ -18,6 +20,7 @@ $(document).ready(function () {
     var topic = $(this).attr("data-name");
     //  use loop to diplay ten gifs of the topic
     var queryUrl = "https://api.giphy.com/v1/gifs/search?api_key=WsZdtxY39VcDAOsbH47aMxYUfXPCISyT&q=" + topic + "&limit=10&offset=0&rating=G&lang=en";
+    console.log(queryUrl)
     $.ajax({
       url: queryUrl,
       method: "GET"
@@ -27,6 +30,7 @@ $(document).ready(function () {
       .then(function (response) {
         // Storing an array of results in the results variable
         var results = response.data;
+        console.log(results);
         // Looping over every result item
         for (var i = 0; i < results.length; i++) {
 
@@ -39,21 +43,26 @@ $(document).ready(function () {
             var rating = results[i].rating;
 
             // Creating an image tag
-            var personImage = $("<img>");
-
+            var gifImage = $("<img>");
+// display rating under gif
             // Creating a paragraph tag with the result item's rating
             var p = $("<p>").text("Rating: " + rating);
 
             // Giving the image tag an src attribute of a proprty pulled off the
             // result item
-            personImage.attr("src", results[i].images.fixed_height.url);
-
-            // Appending the paragraph and personImage we created to the "gifDiv" div we created
+            
+            gifImage.attr("src", results[i].images.fixed_height_still.url);
+// start and stop animation on click
+if (gifImage.attr("data-active") === false ){
+  gifImage.attr("src", results[i].images.original.url)
+  gifImage.attr("data-active", true);
+} 
+            // Appending the paragraph and gifImage we created to the "gifDiv" div we created
             gifDiv.append(personImage);
             gifDiv.append(p);
 
 
-            // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
+            // Prepending the gifDiv to the ".gif" div in the HTML
             $(".gif").prepend(gifDiv);
             gifDiv.append(personImage);
             gifDiv.append(p);
@@ -61,8 +70,8 @@ $(document).ready(function () {
           }
         }
       });
-    // start and stop animation on click
+    
 
-    // display rating under gif
+    
   });
 });

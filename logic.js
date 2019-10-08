@@ -44,19 +44,20 @@ $(document).ready(function () {
 
             // Creating an image tag
             var gifImage = $("<img>");
-// display rating under gif
+            // display rating under gif
             // Creating a paragraph tag with the result item's rating
             var p = $("<p>").text("Rating: " + rating);
 
             // Giving the image tag an src attribute of a proprty pulled off the
             // result item
-            
+
             gifImage.attr("src", results[i].images.fixed_height_still.url);
-// start and stop animation on click
-if (gifImage.attr("data-active") === false ){
-  gifImage.attr("src", results[i].images.original.url)
-  gifImage.attr("data-active", true);
-} 
+
+            
+
+
+
+
             // Appending the paragraph and gifImage we created to the "gifDiv" div we created
             gifDiv.append(personImage);
             gifDiv.append(p);
@@ -70,8 +71,20 @@ if (gifImage.attr("data-active") === false ){
           }
         }
       });
-    
 
-    
+
+
   });
+  // start and stop animation on click
+  $(".gif").on("click", function () {
+
+    if (gifImage.attr("data-active") === false) {
+      gifImage.attr("src", results[i].images.original.url)
+      gifImage.attr("data-active", true);
+    } else {
+      gifImage.attr("src", results[i].images.fixed_height_still.url);
+      gifImage.attr("data-active", false);
+    }
+  });
+
 });

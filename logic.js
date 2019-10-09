@@ -75,16 +75,16 @@ $(document).ready(function () {
 
 
   });
-  // start and stop animation on click
-  $(".gif").on("click", function () {
+  // // start and stop animation on click
+  // $(".gif").on("click", function () {
 
-    if (gifImage.attr("data-active") === false) {
-      gifImage.attr("src", results[i].images.original.url)
-      gifImage.attr("data-active", true);
-    } else {
-      gifImage.attr("src", results[i].images.fixed_height_still.url);
-      gifImage.attr("data-active", false);
-    }
-  });
+  //   if (gifImage.attr("data-active") === false) {
+  //     gifImage.attr("src", results[i].images.original.url)
+  //     gifImage.attr("data-active", true);
+  //   } else {
+  //     gifImage.attr("src", results[i].images.fixed_height_still.url);
+  //     gifImage.attr("data-active", false);
+  //   }
+  // });
 
 });

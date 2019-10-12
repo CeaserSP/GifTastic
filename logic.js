@@ -54,18 +54,28 @@ $(document).ready(function () {
             gifImage.attr("src", results[i].images.fixed_height_still.url);
 
             
+// // start and stop animation on click
+            $(".gif").on("click", function () {
 
+              if (gifImage.attr("data-active") === false) {
+                gifImage.attr("src", results[i].images.original.url)
+                gifImage.attr("data-active", true);
+              } else {
+                gifImage.attr("src", results[i].images.fixed_height_still.url);
+                gifImage.attr("data-active", false);
+              }
+            });
 
 
 
             // Appending the paragraph and gifImage we created to the "gifDiv" div we created
-            gifDiv.append(personImage);
+            gifDiv.append(gifImage);
             gifDiv.append(p);
 
 
             // Prepending the gifDiv to the ".gif" div in the HTML
             $(".gif").prepend(gifDiv);
-            gifDiv.append(personImage);
+            gifDiv.append(gifImage);
             gifDiv.append(p);
 
           }
@@ -75,16 +85,6 @@ $(document).ready(function () {
 
 
   });
-  // // start and stop animation on click
-  // $(".gif").on("click", function () {
-
-  //   if (gifImage.attr("data-active") === false) {
-  //     gifImage.attr("src", results[i].images.original.url)
-  //     gifImage.attr("data-active", true);
-  //   } else {
-  //     gifImage.attr("src", results[i].images.fixed_height_still.url);
-  //     gifImage.attr("data-active", false);
-  //   }
-  // });
+  
 
 });

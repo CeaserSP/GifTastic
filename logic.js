@@ -7,24 +7,28 @@ $(document).ready(function () {
     "formula1",
     "supercar"
   ];
-
-  function inputTopics() {
+console.log(topics);
+// for loop to appends topics to html
+for (var i = 0; i < topics.length; i++) {
+  var button = $("<button>" + topics[i] + "</button>");
+  // button.addClass(topics[i])
+  button.appendTo(".buttons");
+  button.attr("data-name", topics[i]);
+  button.attr("data-active", false);
+};
+ 
+  $("#add-topic").on("click", function(){
     var userInput = document.getElementById('input-term').value;
     topics.push(userInput);
-    console.log(topics);
-    return false;
-  }
-  $("#add-topic").on("click", function () {
-    inputTopics;
-  });
-  // for loop to appends topics to html
-  for (var i = 0; i < topics.length; i++) {
-    var button = $("<button>" + topics[i] + "</button>");
+    // console.log(topics);
+    var button = $("<button>" + userInput + "</button>");
     // button.addClass(topics[i])
     button.appendTo(".buttons");
-    button.attr("data-name", topics[i]);
+    button.attr("data-name", userInput);
     button.attr("data-active", false);
-  }
+    return false;
+  });
+  
   //  get gifs by topic
   $("button").on("click", function () {
 

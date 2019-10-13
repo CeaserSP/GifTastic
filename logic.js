@@ -1,11 +1,22 @@
 $(document).ready(function () {
   // Array topics
+
   var topics = [
     "cars",
     "nascar",
     "formula1",
     "supercar"
   ];
+
+  function inputTopics() {
+    var userInput = document.getElementById('input-term').value;
+    topics.push(userInput);
+    console.log(topics);
+    return false;
+  }
+  $("#add-topic").on("click", function () {
+    inputTopics;
+  });
   // for loop to appends topics to html
   for (var i = 0; i < topics.length; i++) {
     var button = $("<button>" + topics[i] + "</button>");
@@ -28,14 +39,17 @@ $(document).ready(function () {
 
       // After the data comes back from the API
       .then(function (response) {
+
         // Storing an array of results in the results variable
         var results = response.data;
         console.log(results);
+
         // Looping over every result item
         for (var i = 0; i < results.length; i++) {
 
           // Only taking action if the photo has an appropriate rating
           if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+
             // Creating a div for the gif
             var gifDiv = $("<div>");
 
@@ -44,34 +58,18 @@ $(document).ready(function () {
 
             // Creating an image tag
             var gifImage = $("<img>");
+
             // display rating under gif
             // Creating a paragraph tag with the result item's rating
             var p = $("<p>").text("Rating: " + rating);
 
             // Giving the image tag an src attribute of a proprty pulled off the
             // result item
-
             gifImage.attr("src", results[i].images.fixed_height_still.url);
-
-            
-// // start and stop animation on click
-            $(".gif").on("click", function () {
-
-              if (gifImage.attr("data-active") === false) {
-                gifImage.attr("src", results[i].images.original.url)
-                gifImage.attr("data-active", true);
-              } else {
-                gifImage.attr("src", results[i].images.fixed_height_still.url);
-                gifImage.attr("data-active", false);
-              }
-            });
-
-
 
             // Appending the paragraph and gifImage we created to the "gifDiv" div we created
             gifDiv.append(gifImage);
             gifDiv.append(p);
-
 
             // Prepending the gifDiv to the ".gif" div in the HTML
             $(".gif").prepend(gifDiv);
@@ -80,11 +78,18 @@ $(document).ready(function () {
 
           }
         }
+        // // start and stop animation on click
+        // $(".gif").on("click", function () {
+
+        //   if (gifImage.attr("data-active") === false) {
+        //     gifImage.attr("src", results[i].images.original.url)
+        //     gifImage.attr("data-active", true);
+        //   }
+        //   else {
+        //     gifImage.attr("src", results[i].images.fixed_height_still.url);
+        //     gifImage.attr("data-active", false);
+        //   }
+        // });
       });
-
-
-
   });
-  
-
 });
